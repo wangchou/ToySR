@@ -1,16 +1,36 @@
-typealias Reducer = (AppState, Action) -> AppState
+typealias Reducer = (AppState, Action) -> AppState?
 
-let myReducer: Reducer = { state, action in
-    var mutatingState = state
+let mainReducer: Reducer = { state, action in
+    var newState = state
 
     switch action {
     case .increaseCounter:
-        mutatingState.counter += 1
+        newState.counter += 1
     case .setImageName(let name):
-        mutatingState.imageName = name
+        newState.imageName = name
+    case .gotoPage(let page):
+        newState.page = page
     default:
-        break
+        return nil
     }
 
-    return mutatingState
+    return newState
+}
+
+let settingReducer: Reducer = { state, action in
+    var newState = state
+
+    switch action {
+    case .setFontSize(let size):
+        newState.settings.fontSize = size
+    default:
+        return nil
+    }
+
+    return newState
+}
+
+let unhandledReducer: Reducer = { state, action in
+    print("warning: \(action) is not handled")
+    return nil
 }

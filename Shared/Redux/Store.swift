@@ -7,18 +7,18 @@ import Foundation
 class Store {
     @Published private(set) var state: AppState
 
-    private let reducer: Reducer
+    private let reducers: [Reducer]
     private var middlewares: [Middleware]
     private let queue = DispatchQueue(label: "action queue", qos: .userInitiated)
 
     init(state: AppState,
-         reducer: @escaping Reducer,
+         reducers: [Reducer],
          middlewares: [Middleware] = []) {
         self.state = state
-        self.reducer = reducer
+        self.reducers = reducers
         self.middlewares = middlewares
 
-        var next: ActionHandler = applyReducer
+        var next: ActionHandler = applyReducers
         for index in middlewares.indices.reversed() {
             self.middlewares[index].next = next
             next = self.middlewares[index].process
@@ -30,12 +30,17 @@ class Store {
             if let middleware = middlewares.first {
                 middleware.process(action)
             } else {
-                applyReducer(action)
+                applyReducers(action)
             }
         }
     }
 
-    private func applyReducer(_ action: Action) {
-        state = reducer(state, action)
+    private func applyReducers(_ action: Action) {
+        for reducer in reducers {
+            if let newState = reducer(state, action) {
+                state = newState
+                break
+            }
+        }
     }
 }

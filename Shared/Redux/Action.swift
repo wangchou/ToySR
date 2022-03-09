@@ -1,10 +1,15 @@
 import Foundation
+import SwiftUI
 
 enum Action {
-    // simple actions (handled by reducer)
+    // mainReducer
     case increaseCounter
     case setImageName(String)
+    case gotoPage(Page)
 
-    // complex actions (handled by complexActionMiddleware)
+    // settingReducer
+    case setFontSize(CGFloat)
+
+    // complexActionMiddleware
     case loadImage
 }

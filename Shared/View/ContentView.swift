@@ -2,80 +2,29 @@ import SwiftUI
 import Combine
 
 struct ContentView: View {
-    @State var counter = 0
-    @State var imageName: String? = nil
+    @State var page: Page = .main
+    @State var fontSize: CGFloat = 12
 
     var body: some View {
         VStack {
-            Button(action: add) {
-                Text("Add")
-                    .padding()
+            switch page {
+            case .main:
+                MainPage()
+            case .setting:
+                SettingPage()
             }
-            Button(action: loadImage) {
-                Text("Load Image")
-                    .padding()
-            }
-
-            Text("Counter: \(counter)")
-
-            if let imageName = imageName {
-                if imageName == "Loading" {
-                    Text("Loading Image")
-                        .foregroundColor(.red)
-                        .frame(width: 100, height: 100)
-                } else {
-                    Image(systemName: imageName)
-                        .resizable()
-                        .frame(width: 100, height: 100)
-                }
-            }
-
-
         }
+        .font(.system(size: fontSize))
         .frame(minWidth: 480, minHeight: 320)
-        // do mapStateToProps/Selector/shouldComponentUpdate here
         .onReceive(store.$state) {
-            //print("on receive \($0) [didSet]")
-            self.counter = $0.counter
-            self.imageName = $0.imageName
+            self.page = $0.page
+            self.fontSize = $0.settings.fontSize
         }
-    }
-
-    /* add this part to view if app needs old value and new value of state
-
-    private var cancellable: AnyCancellable?
-
-    init() {
-        cancellable = store.$state
-            .sink() {
-                //                        old state      new state
-                print ("init subscribe: \(store.state) -> \($0) [willSet]")
-            }
-    }
-    */
-}
-
-// Actions
-extension ContentView {
-    func add() {
-        store.dispatch(.increaseCounter)
-    }
-
-    func loadImage() {
-        store.dispatch(.loadImage)
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
-    }
-}
-
-extension View {
-    func debug() -> Self {
-        print(Mirror(reflecting: self).subjectType)
-        //print(String(reflecting: self))
-        return self
     }
 }
