@@ -9,6 +9,7 @@ class Store {
 
     private let reducer: Reducer
     private var middlewares: [Middleware]
+    private let queue = DispatchQueue(label: "action queue", qos: .userInitiated)
 
     init(state: AppState,
          reducer: @escaping Reducer,
@@ -25,10 +26,12 @@ class Store {
     }
 
     func dispatch(_ action: Action) {
-        if let middleware = middlewares.first {
-            middleware.process(action)
-        } else {
-            applyReducer(action)
+        queue.sync {
+            if let middleware = middlewares.first {
+                middleware.process(action)
+            } else {
+                applyReducer(action)
+            }
         }
     }
 
@@ -36,4 +39,3 @@ class Store {
         state = reducer(state, action)
     }
 }
-

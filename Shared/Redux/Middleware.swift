@@ -1,3 +1,5 @@
+import Foundation
+
 typealias ActionHandler = (Action) -> Void
 
 class Middleware {
@@ -7,25 +9,27 @@ class Middleware {
 
 class Logger: Middleware {
     override func process(_ action: Action) {
-        switch action {
-        default:
-            print("------")
-            print("Action: \(action)")
-            next?(action)
-            print("New State: \(store.state)")
-            break
-        }
+        print("------")
+        print("Action: \(action)")
+        next?(action)
+        print("State : \(action) \(store.state)")
     }
 }
 
-class ThunkMiddleware: Middleware {
+// handle complex action
+// could be further divided into domains
+// ex: ServiceApiHandler, SpeechRecognitionHandler...
+class ComplexActionHandler: Middleware {
     override func process(_ action: Action) {
         switch action {
-        case .thunk(let function):
-            function()
+        case .loadImage:
+            Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { _ in
+                store.dispatch(.setImageName("pencil.circle"))
+            }
+            next?(.setImageName("Loading"))
+
         default:
             next?(action)
-            break
         }
     }
 }

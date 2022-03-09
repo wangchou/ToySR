@@ -3,6 +3,7 @@ import Combine
 
 struct ContentView: View {
     @State var counter = 0
+    @State var imageName: String? = nil
 
     var body: some View {
         VStack {
@@ -10,18 +11,33 @@ struct ContentView: View {
                 Text("Add")
                     .padding()
             }
-            Button(action: delayAdd) {
-                Text("Add with 1 secs delay")
+            Button(action: loadImage) {
+                Text("Load Image")
                     .padding()
             }
 
             Text("Counter: \(counter)")
+
+            if let imageName = imageName {
+                if imageName == "Loading" {
+                    Text("Loading Image")
+                        .foregroundColor(.red)
+                        .frame(width: 100, height: 100)
+                } else {
+                    Image(systemName: imageName)
+                        .resizable()
+                        .frame(width: 100, height: 100)
+                }
+            }
+
+
         }
         .frame(minWidth: 480, minHeight: 320)
         // do mapStateToProps/Selector/shouldComponentUpdate here
         .onReceive(store.$state) {
             //print("on receive \($0) [didSet]")
             self.counter = $0.counter
+            self.imageName = $0.imageName
         }
     }
 
@@ -45,12 +61,8 @@ extension ContentView {
         store.dispatch(.increaseCounter)
     }
 
-    func delayAdd() {
-        store.dispatch(.thunk {
-            Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { _ in
-                store.dispatch(.increaseCounter)
-            }
-        })
+    func loadImage() {
+        store.dispatch(.loadImage)
     }
 }
 

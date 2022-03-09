@@ -1,9 +1,10 @@
 import Foundation
 
-typealias Thunk = () -> Void
-
 enum Action {
+    // simple actions (handled by reducer)
     case increaseCounter
-    case thunk(Thunk)
-}
+    case setImageName(String)
 
+    // complex actions (handled by complexActionMiddleware)
+    case loadImage
+}

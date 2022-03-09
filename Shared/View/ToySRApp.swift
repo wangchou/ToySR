@@ -8,7 +8,7 @@ let store = Store(state: AppState(),
                   reducer: myReducer,
                   middlewares: [
                     Logger(),
-                    ThunkMiddleware()
+                    ComplexActionHandler()
                   ]
             )
 
