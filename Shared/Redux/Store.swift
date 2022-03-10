@@ -8,9 +8,10 @@ class Store {
     @Published private(set) var state: AppState
 
     // devtools
-    @Published private(set) var history: [(Action, AppState)] = []
+    @Published private(set) var history: [(ActionMeta, AppState)] = []
     @Published private(set) var log: String = "console view\n"
 
+    private var actionCount = 0
     private let reducers: [Reducer]
     private var middlewares: [Middleware]
     private let queue = DispatchQueue(label: "action queue", qos: .userInitiated)
@@ -22,7 +23,7 @@ class Store {
         self.reducers = reducers
         self.middlewares = middlewares
 
-        var next: ActionHandler = applyReducers
+        var next: ActionMetaHandler = applyReducers
         for index in middlewares.indices.reversed() {
             self.middlewares[index].next = next
             next = self.middlewares[index].process
@@ -33,19 +34,28 @@ class Store {
         log += str + "\n"
     }
 
-    func dispatch(_ action: Action) {
-        store.print(String(describing: action))
+    func dispatch(_ action: Action, parents: [Int] = []) {
         queue.sync {
+            let actionMeta = ActionMeta(sn: getActionSN(),
+                                        parents: parents,
+                                        action: action)
+
             if let middleware = middlewares.first {
-                middleware.process(action)
+                middleware.process(actionMeta)
             } else {
-                applyReducers(action)
+                applyReducers(actionMeta)
             }
-            history.append((action, state))
+            history.append((actionMeta, state))
         }
     }
 
-    private func applyReducers(_ action: Action) {
+    func getActionSN() -> Int {
+        actionCount += 1
+        return actionCount
+    }
+
+    private func applyReducers(_ actionMeta: ActionMeta) {
+        let action = actionMeta.action
         for reducer in reducers {
             if let newState = reducer(state, action) {
                 state = newState

@@ -1,17 +1,17 @@
 import Foundation
 
-typealias ActionHandler = (Action) -> Void
+typealias ActionMetaHandler = (ActionMeta) -> Void
 
 class Middleware {
-    var next: ActionHandler? = nil
-    func process(_ action: Action) {}
+    var next: ActionMetaHandler? = nil
+    func process(_ actionMeta: ActionMeta) {}
 }
 
 class Logger: Middleware {
-    override func process(_ action: Action) {
+    override func process(_ actionMeta: ActionMeta) {
         print("------")
-        print("Action: \(action)")
-        next?(action)
+        print("Action: \(actionMeta.action)")
+        next?(actionMeta)
         store.state.prettyPrint()
     }
 }
@@ -20,16 +20,19 @@ class Logger: Middleware {
 // could be further divided into domains
 // ex: ServiceApiHandler, SpeechRecognitionHandler...
 class ComplexActionHandler: Middleware {
-    override func process(_ action: Action) {
-        switch action {
+    override func process(_ actionMeta: ActionMeta) {
+        switch actionMeta.action {
         case .loadImage:
             Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { _ in
-                store.dispatch(.setImageName("pencil.circle"))
+                store.dispatch(.setImageName("pencil.circle"), parents: actionMeta.allSN)
             }
-            next?(.setImageName("Loading"))
+
+            next?(.init(sn: -1,
+                        parents: actionMeta.allSN,
+                        action: .setImageName("Loading")))
 
         default:
-            next?(action)
+            next?(actionMeta)
         }
     }
 }

@@ -11,7 +11,7 @@ import SwiftUI
 // let scale: CGFloat = 254/326
 
 struct DeviceView: View {
-    var device: Device = Device.iPhoneSE
+    var device: Device = .iPhoneSE1
 
     @State var page: Page = .main
     @State var fontSize: CGFloat = 12
@@ -19,9 +19,9 @@ struct DeviceView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             Text(device.name + " " + String(describing: device.size))
-                .padding(3)
+                .padding(.horizontal, 3)
                 .foregroundColor(.white)
-                .background(.pink.opacity(0.5))
+                .background(.red.opacity(0.7))
             VStack {
                 switch page {
                 case .main:

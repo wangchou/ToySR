@@ -10,7 +10,7 @@ import Foundation
 
 struct HistoryView: View {
     @State var actionIndex: Int = -1
-    @State var history: [(Action, AppState)] = []
+    @State var history: [(ActionMeta, AppState)] = []
     var body: some View {
         HStack(alignment: .top, spacing: 5) {
             // action lists
@@ -20,8 +20,9 @@ struct HistoryView: View {
                         Color.white
                             .frame(width: 200, height: 40)
                             .border(actionIndex == i ? .red : .gray, width: 1)
-                            .overlay {
-                                Text(String(describing: history[i].0))
+                            .overlay(alignment: .leading) {
+                                Text(history[i].0.prettyString)
+                                    .padding(.leading, 5)
                             }
                             .onTapGesture {
                                 actionIndex = i

@@ -5,7 +5,7 @@ struct ContentView: View {
 
     var body: some View {
         HStack(alignment: .top, spacing: 0) {
-            DeviceView(device: .iPhoneSE)
+            DeviceView(device: .iPhoneSE2)
             //DeviceView(device: .iPhone13)
             VStack(spacing: 0) {
                 HistoryView()
