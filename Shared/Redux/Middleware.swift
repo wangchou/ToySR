@@ -12,7 +12,7 @@ class Logger: Middleware {
         print("------")
         print("Action: \(action)")
         next?(action)
-        print("State : \(action) \(store.state)")
+        store.state.prettyPrint()
     }
 }
 

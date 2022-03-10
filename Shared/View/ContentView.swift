@@ -2,23 +2,16 @@ import SwiftUI
 import Combine
 
 struct ContentView: View {
-    @State var page: Page = .main
-    @State var fontSize: CGFloat = 12
 
     var body: some View {
-        VStack {
-            switch page {
-            case .main:
-                MainPage()
-            case .setting:
-                SettingPage()
+        HStack(alignment: .top, spacing: 0) {
+            DeviceView(device: .iPhoneSE)
+            //DeviceView(device: .iPhone13)
+            VStack(spacing: 0) {
+                HistoryView()
+                ConsoleView()
             }
-        }
-        .font(.system(size: fontSize))
-        .frame(minWidth: 480, minHeight: 320)
-        .onReceive(store.$state) {
-            self.page = $0.page
-            self.fontSize = $0.settings.fontSize
+            .alignmentGuide(VerticalAlignment.top) { _ in -10 }
         }
     }
 }

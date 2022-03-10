@@ -38,6 +38,7 @@ struct MainPage: View {
                 Text("go to setting")
                     .padding()
             }
+            .padding(EdgeInsets(top: 0, leading: 0, bottom: 20, trailing: 0))
         }
         // do mapStateToProps/Selector/shouldComponentUpdate here
         .onReceive(store.$state) {
