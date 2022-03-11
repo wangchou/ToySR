@@ -4,6 +4,7 @@ import Foundation
 //      - [create]        init(...)
 //      - [read]          getter of state variable
 //      - [update/delete] dispatch(Action)
+//      - [log]           log to devtools
 class Store {
     @Published private(set) var state: AppState
 
@@ -30,7 +31,7 @@ class Store {
         }
     }
 
-    func print(_ str: String) {
+    func log(_ str: String) {
         log += str + "\n"
     }
 
@@ -49,7 +50,7 @@ class Store {
         }
     }
 
-    func getActionSN() -> Int {
+    private func getActionSN() -> Int {
         actionCount += 1
         return actionCount
     }

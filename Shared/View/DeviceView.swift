@@ -11,10 +11,22 @@ import SwiftUI
 // let scale: CGFloat = 254/326
 
 struct DeviceView: View {
-    var device: Device = .iPhoneSE1
+    @Binding var device: Device
 
     @State var page: Page = .main
     @State var fontSize: CGFloat = 12
+
+    var nextDevice: Device {
+        let workingSet: [Device] = [
+            .iPhoneSE1,
+            .iPhone13,
+        ]
+        if let index = workingSet.firstIndex(where: { $0.name == device.name }) {
+            return workingSet[(index+1) % workingSet.count]
+        }
+        print("cannot find current device")
+        return device
+    }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -22,6 +34,9 @@ struct DeviceView: View {
                 .padding(.horizontal, 3)
                 .foregroundColor(.white)
                 .background(.red.opacity(0.7))
+                .onTapGesture {
+                    device = nextDevice
+                }
             VStack {
                 switch page {
                 case .main:
@@ -45,6 +60,6 @@ struct DeviceView: View {
 
 struct DeviceView_Previews: PreviewProvider {
     static var previews: some View {
-        DeviceView()
+        DeviceView(device: .constant(.iPhoneSE2))
     }
 }

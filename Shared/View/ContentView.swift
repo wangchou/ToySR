@@ -2,16 +2,13 @@ import SwiftUI
 import Combine
 
 struct ContentView: View {
+    @State var device1: Device = .iPhoneSE1
 
     var body: some View {
         HStack(alignment: .top, spacing: 0) {
-            DeviceView(device: .iPhoneSE2)
+            DeviceView(device: $device1)
             //DeviceView(device: .iPhone13)
-            VStack(spacing: 0) {
-                HistoryView()
-                ConsoleView()
-            }
-            .alignmentGuide(VerticalAlignment.top) { _ in -10 }
+            DevtoolsView()
         }
     }
 }

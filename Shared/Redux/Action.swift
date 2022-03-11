@@ -1,7 +1,7 @@
 import Foundation
 import SwiftUI
 
-enum Action {
+enum Action: Hashable {
     // mainReducer
     case increaseCounter
     case setImageName(String)

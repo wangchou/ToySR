@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Device {
+struct Device: Equatable {
     let name: String
     let size: CGSize
 
