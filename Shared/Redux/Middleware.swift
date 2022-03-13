@@ -1,38 +1,30 @@
 import Foundation
 
 typealias ActionMetaHandler = (ActionMeta) -> Void
+typealias Middleware = (@escaping ActionMetaHandler) -> ActionMetaHandler
 
-class Middleware {
-    var next: ActionMetaHandler? = nil
-    func process(_ actionMeta: ActionMeta) {}
-}
-
-class Logger: Middleware {
-    override func process(_ actionMeta: ActionMeta) {
-        print("------")
-        print("Action: \(actionMeta.action)")
-        next?(actionMeta)
-        store.state.prettyPrint()
-    }
-}
+let logger: Middleware = { next in { actionMeta in
+    print("------")
+    print("Action: \(actionMeta.action)")
+    next(actionMeta)
+    store.state.prettyPrint()
+}}
 
 // handle complex action
 // could be further divided into domains
 // ex: ServiceApiHandler, SpeechRecognitionHandler...
-class ComplexActionHandler: Middleware {
-    override func process(_ actionMeta: ActionMeta) {
-        switch actionMeta.action {
-        case .loadImage:
-            Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { _ in
-                store.dispatch(.setImageName("pencil.circle"), parents: actionMeta.allSN)
-            }
-
-            next?(.init(sn: -1,
-                        parents: actionMeta.allSN,
-                        action: .setImageName("Loading")))
-
-        default:
-            next?(actionMeta)
+let complexActionHandler: Middleware = { next in { actionMeta in
+    switch actionMeta.action {
+    case .loadImage:
+        Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { _ in
+            store.dispatch(.setImageName("pencil.circle"), actionMeta)
         }
+
+        next(.init(id: -1,
+                    parents: actionMeta.allIds,
+                    action: .setImageName("Loading")))
+
+    default:
+        next(actionMeta)
     }
-}
+}}

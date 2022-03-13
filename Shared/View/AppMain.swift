@@ -4,17 +4,18 @@ import SwiftUI
 //  - [read]  by store.state
 //  - [write] by store.dispatch(Action)
 //  - [sync state with view] by onReceive(store.$state) in Views
-let store = Store(state: AppState(),
-                  reducers: [
-                    mainReducer,
-                    settingReducer,
-                    unhandledReducer
-                  ],
-                  middlewares: [
-                    Logger(),
-                    ComplexActionHandler()
-                  ]
-            )
+let store = Store(
+    state: AppState(),
+    reducers: [
+        mainReducer,
+        settingReducer,
+        unhandledReducer
+    ],
+    middlewares: [
+        logger,
+        complexActionHandler
+    ]
+)
 
 @main
 struct MyApp: App {

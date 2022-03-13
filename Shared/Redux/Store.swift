@@ -8,51 +8,31 @@ import Foundation
 class Store {
     @Published private(set) var state: AppState
 
-    // devtools
-    @Published private(set) var history: [(ActionMeta, AppState)] = []
-    @Published private(set) var log: String = "console view\n"
-
-    private var actionCount = 0
     private let reducers: [Reducer]
-    private var middlewares: [Middleware]
     private let queue = DispatchQueue(label: "action queue", qos: .userInitiated)
+    private var _dispatch: ActionMetaHandler!
 
     init(state: AppState,
          reducers: [Reducer],
          middlewares: [Middleware] = []) {
         self.state = state
         self.reducers = reducers
-        self.middlewares = middlewares
 
-        var next: ActionMetaHandler = applyReducers
-        for index in middlewares.indices.reversed() {
-            self.middlewares[index].next = next
-            next = self.middlewares[index].process
-        }
-    }
-
-    func log(_ str: String) {
-        log += str + "\n"
-    }
-
-    func dispatch(_ action: Action, parents: [Int] = []) {
-        queue.sync {
-            let actionMeta = ActionMeta(sn: getActionSN(),
-                                        parents: parents,
-                                        action: action)
-
-            if let middleware = middlewares.first {
-                middleware.process(actionMeta)
-            } else {
-                applyReducers(actionMeta)
+        _dispatch = middlewares
+            .reversed()
+            .reduce(applyReducers) { next, createMiddleware in
+                createMiddleware(next)
             }
+    }
+
+    func dispatch(_ action: Action, _ parent: ActionMeta? = nil) {
+        queue.sync {
+            let actionMeta = ActionMeta(id: nextId,
+                                        parents: parent?.allIds ?? [],
+                                        action: action)
+            _dispatch(actionMeta)
             history.append((actionMeta, state))
         }
-    }
-
-    private func getActionSN() -> Int {
-        actionCount += 1
-        return actionCount
     }
 
     private func applyReducers(_ actionMeta: ActionMeta) {
@@ -63,5 +43,20 @@ class Store {
                 break
             }
         }
+    }
+
+    //----------------------------------------------------------------
+    // for devtools
+    @Published private(set) var history: [(ActionMeta, AppState)] = []
+    @Published private(set) var log = "console view\n"
+
+    private var actionCount = 0
+    func log(_ str: String) {
+        log += str + "\n"
+    }
+
+    private var nextId: Int {
+        actionCount += 1
+        return actionCount
     }
 }

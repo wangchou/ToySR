@@ -14,22 +14,20 @@ enum Action: Hashable {
     case loadImage
 }
 
-// action with meta info
+// action with meta infos for devtools
 // it created in store.dispatch
 // and only be used in middleware chain
 struct ActionMeta {
-    let sn: Int // serial number
-    let parents: [Int] // parent actions's serial number
+    let id: Int // serial number
+    let parents: [Int]
     let action: Action
 
-    var allSN: [Int] {
-        var result : [Int] = parents
-        result.append(sn)
-        return result
+    var allIds: [Int] {
+        parents + [id]
     }
 
     var prettyString: String {
-        let parentChainStr = allSN.reduce("") {
+        let parentChainStr = allIds.reduce("") {
             if $0 == "" {
                 return "\($1)"
             }
