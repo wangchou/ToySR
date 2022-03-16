@@ -19,6 +19,8 @@
 		BE5D649327D8A8BF006B4222 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5D648127D8A8BD006B4222 /* ContentView.swift */; };
 		BE5D649427D8A8BF006B4222 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE5D648227D8A8BF006B4222 /* Assets.xcassets */; };
 		BE5D649527D8A8BF006B4222 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE5D648227D8A8BF006B4222 /* Assets.xcassets */; };
+		BE6738EF27E03644006873D1 /* GamePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6738EE27E03644006873D1 /* GamePage.swift */; };
+		BE6738F027E03644006873D1 /* GamePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6738EE27E03644006873D1 /* GamePage.swift */; };
 		BEE7C39127D8A96F00DF50E3 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE7C38C27D8A96F00DF50E3 /* Store.swift */; };
 		BEE7C39227D8A96F00DF50E3 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE7C38C27D8A96F00DF50E3 /* Store.swift */; };
 		BEE7C39327D8A96F00DF50E3 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE7C38D27D8A96F00DF50E3 /* AppState.swift */; };
@@ -53,6 +55,7 @@
 		BE5D648727D8A8BF006B4222 /* ToySR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToySR.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE5D648D27D8A8BF006B4222 /* ToySR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToySR.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE5D648F27D8A8BF006B4222 /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
+		BE6738EE27E03644006873D1 /* GamePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePage.swift; sourceTree = "<group>"; };
 		BEE7C38C27D8A96F00DF50E3 /* Store.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		BEE7C38D27D8A96F00DF50E3 /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		BEE7C38E27D8A96F00DF50E3 /* Action.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
@@ -123,13 +126,13 @@
 		BEE7C38A27D8A93F00DF50E3 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				BEE7C3B427D9EBE400DF50E3 /* Devtools */,
 				BE5D648027D8A8BD006B4222 /* AppMain.swift */,
 				BE5D648127D8A8BD006B4222 /* ContentView.swift */,
 				BEE7C3B827D9F17800DF50E3 /* DeviceView.swift */,
 				BEE7C3A127D9117D00DF50E3 /* MainPage.swift */,
 				BEE7C3A527D9119600DF50E3 /* SettingPage.swift */,
-				BEE7C3B527D9F0AF00DF50E3 /* Device.swift */,
-				BEE7C3B427D9EBE400DF50E3 /* Devtools */,
+				BE6738EE27E03644006873D1 /* GamePage.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -149,6 +152,7 @@
 		BEE7C3B427D9EBE400DF50E3 /* Devtools */ = {
 			isa = PBXGroup;
 			children = (
+				BEE7C3B527D9F0AF00DF50E3 /* Device.swift */,
 				BE2C0CD427DB6A0000591D3F /* DevtoolsView.swift */,
 				BE2C0CCE27DB5A3B00591D3F /* ActionListView.swift */,
 				BEE7C3AE27D955F300DF50E3 /* HistoryView.swift */,
@@ -260,6 +264,7 @@
 				BEE7C39127D8A96F00DF50E3 /* Store.swift in Sources */,
 				BEE7C3A627D9119600DF50E3 /* SettingPage.swift in Sources */,
 				BE5D649227D8A8BF006B4222 /* ContentView.swift in Sources */,
+				BE6738EF27E03644006873D1 /* GamePage.swift in Sources */,
 				BEE7C3A227D9117D00DF50E3 /* MainPage.swift in Sources */,
 				BE5D649027D8A8BF006B4222 /* AppMain.swift in Sources */,
 				BEE7C39727D8A96F00DF50E3 /* Middleware.swift in Sources */,
@@ -283,6 +288,7 @@
 				BEE7C39227D8A96F00DF50E3 /* Store.swift in Sources */,
 				BEE7C3A727D9119600DF50E3 /* SettingPage.swift in Sources */,
 				BE5D649327D8A8BF006B4222 /* ContentView.swift in Sources */,
+				BE6738F027E03644006873D1 /* GamePage.swift in Sources */,
 				BEE7C3A327D9117D00DF50E3 /* MainPage.swift in Sources */,
 				BE5D649127D8A8BF006B4222 /* AppMain.swift in Sources */,
 				BEE7C39827D8A96F00DF50E3 /* Middleware.swift in Sources */,

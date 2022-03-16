@@ -7,6 +7,12 @@ struct Settings: Codable {
 enum Page: Codable {
   case main
   case setting
+  case game
+}
+
+struct CurrentGame: Codable {
+  var index = 0
+  var score = 0
 }
 
 struct AppState: Codable {
@@ -16,7 +22,12 @@ struct AppState: Codable {
   var imageName: String? = nil
   
   var settings = Settings()
+
+  // Game
+  var currentGame = CurrentGame()
+  var gameScores: [Int] = []
 }
+
 
 // pretty print
 extension AppState {

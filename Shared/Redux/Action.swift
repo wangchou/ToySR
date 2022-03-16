@@ -12,6 +12,11 @@ enum Action: Hashable {
 
   // complexActionMiddleware
   case loadImage
+
+  // card game
+  case startGame
+  case nextQuestion
+  case finishGame
 }
 
 extension Action {

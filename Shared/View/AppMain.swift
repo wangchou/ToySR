@@ -9,6 +9,7 @@ let store = Store(
   reducers: [
     mainReducer,
     settingReducer,
+    gameReducer,
     unhandledReducer
   ],
   middlewares: [

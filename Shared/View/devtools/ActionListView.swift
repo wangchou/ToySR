@@ -13,7 +13,8 @@ struct ActionListView: View {
     .gotoPage(.setting),
     .setFontSize(20),
     .setFontSize(12),
-    .loadImage
+    .loadImage,
+    .startGame
   ]
   
   var body: some View {
@@ -22,7 +23,9 @@ struct ActionListView: View {
         ForEach(demoCases, id: \.self) { action in
           ActionButton(title: "\(action.str)",
                        isSelected: false,
-                       onTap: { store.dispatch(action) })
+                       onTap: {
+            store.dispatch(action)
+          })
         }
       }
     }

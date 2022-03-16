@@ -36,6 +36,8 @@ struct DeviceView: View {
           MainPage()
         case .setting:
           SettingPage()
+        case .game:
+          GamePage()
         }
       }
       .frame(width: device.size.width,

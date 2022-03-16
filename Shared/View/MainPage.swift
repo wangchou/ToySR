@@ -1,9 +1,11 @@
 import SwiftUI
+import Foundation
 
 struct MainPage: View {
   @State var counter = 0
   @State var imageName: String? = nil
-  
+  @State var gameScores: [Int] = []
+
   var body: some View {
     VStack {
       Color.pink
@@ -21,6 +23,9 @@ struct MainPage: View {
       }
       
       Text("Counter: \(counter)")
+        .padding()
+      Text("\(gameScores.count) played, highest score: \(gameScores.max() ?? 0)")
+        .padding()
       
       if let imageName = imageName {
         if imageName == "Loading" {
@@ -39,12 +44,18 @@ struct MainPage: View {
           .padding()
       }
       .padding(EdgeInsets(top: 0, leading: 0, bottom: 20, trailing: 0))
+      Button(action: startGame) {
+        Text("start game")
+          .padding()
+      }
+      .padding(EdgeInsets(top: 0, leading: 0, bottom: 20, trailing: 0))
     }
     // do mapStateToProps/Selector/shouldComponentUpdate here
     .onReceive(store.$state) {
       //print("on receive \($0) [didSet]")
       self.counter = $0.counter
       self.imageName = $0.imageName
+      self.gameScores = $0.gameScores
     }
   }
   
@@ -59,6 +70,10 @@ struct MainPage: View {
   
   func gotoSetting() {
     ~.gotoPage(.setting)
+  }
+
+  func startGame() {
+    ~.startGame
   }
 }
 

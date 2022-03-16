@@ -9,7 +9,6 @@ class Store {
   @Published private(set) var state: AppState
   
   private let reducers: [Reducer]
-  private let queue = DispatchQueue(label: "action queue", qos: .userInitiated)
   private var _dispatch: ActionMetaHandler!
   
   init(state: AppState,
@@ -26,12 +25,14 @@ class Store {
   }
   
   func dispatch(_ action: Action, _ parent: ActionMeta? = nil) {
-    queue.sync {
-      let actionMeta = ActionMeta(id: nextId,
+    // avoid "Publishing changes from background threads is not allowed" issue
+    // from Task { await xxxAction }
+    DispatchQueue.main.async {
+      let actionMeta = ActionMeta(id: self.nextId,
                                   parents: parent?.allIds ?? [],
                                   action: action)
-      _dispatch(actionMeta)
-      history.append((actionMeta, state))
+      self._dispatch(actionMeta)
+      self.history.append((actionMeta, self.state))
     }
   }
   
@@ -39,7 +40,7 @@ class Store {
     let action = actionMeta.action
     for reducer in reducers {
       if let newState = reducer(state, action) {
-        state = newState
+        self.state = newState
         break
       }
     }
@@ -52,7 +53,9 @@ class Store {
   
   private var actionCount = 0
   func log(_ str: String) {
-    log += str + "\n"
+    DispatchQueue.main.async {
+      self.log += str + "\n"
+    }
   }
   
   private var nextId: Int {
