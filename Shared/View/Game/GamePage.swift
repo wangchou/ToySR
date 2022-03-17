@@ -1,25 +1,10 @@
 import SwiftUI
 
-enum UserSelection {
-  case left
-  case right
-  case timeout
-}
-
-enum GameStep {
-  case questioning
-  case answering
-  case responding
-}
-
 private var userActionContinuation: CheckedContinuation<Void, Never>?
 
 struct GamePage: View {
   @State var questionIndex = 0
-  @State var question: (String, String) = ("你好", "こんにちは")
-  @State var candidate: (String, String) = ("早安", "おはようございます")
   @State var gameStep: GameStep = .questioning
-  @State var answerOnL: Bool = false
   @State var selection: UserSelection = .timeout
 
   var body: some View {
@@ -30,7 +15,8 @@ struct GamePage: View {
           Button(action: { selectAnswer(.right)} ) { Text("Right") }
         }
       }
-      Text("\(questionIndex)/10")
+
+      Text("\(questionIndex)/4")
         .padding()
         .task(priority: .userInitiated) {
           await nextQuestion()
@@ -44,6 +30,7 @@ struct GamePage: View {
   func nextQuestion() async {
     if questionIndex < 4 {
       ~.nextQuestion
+
       gameStep = .questioning
       await speak("Question: hello")
       await speak("Candidates: left:aaa, right:bbb")
@@ -63,32 +50,30 @@ struct GamePage: View {
   func selectAnswer(_ selection: UserSelection) {
     guard self.selection == .timeout else { return }
     self.selection = selection
-    userActionContinuation?.resume(returning: ())
+    userActionContinuation?.resume()
     store.log("userAction resume called")
     userActionContinuation = nil
   }
 
-  func speak(_ str: String) async -> Void {
-    return await withCheckedContinuation { continuation in
+  func speak(_ str: String) async {
+    return await withCheckedContinuation { cont in
       DispatchQueue.global().asyncAfter(deadline: .now() + .seconds(1)) {
         store.log("\"\(str)\" is said")
-        continuation.resume(returning: ())
+        cont.resume()
       }
     }
   }
 
-  func userAction() async -> Void {
+  func userAction() async {
     self.selection = .timeout
     userActionContinuation = nil
     let index = questionIndex
-    return await withCheckedContinuation { continuation in
-      userActionContinuation = continuation
+    return await withCheckedContinuation { cont in
+      userActionContinuation = cont
       DispatchQueue.global().asyncAfter(deadline: .now() + .seconds(5)) {
-        guard self.selection == .timeout &&
-              self.questionIndex == index else { return }
-        store.log("Time out")
-        store.log("userAction resume called")
-        continuation.resume(returning: ())
+        // continuation can only be called exactly once
+        guard self.questionIndex == index else { return }
+        selectAnswer(.timeout)
       }
     }
   }

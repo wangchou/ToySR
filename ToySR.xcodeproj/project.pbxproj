@@ -13,6 +13,14 @@
 		BE2C0CD327DB64D200591D3F /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2C0CD127DB64D200591D3F /* ActionButton.swift */; };
 		BE2C0CD527DB6A0000591D3F /* DevtoolsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2C0CD427DB6A0000591D3F /* DevtoolsView.swift */; };
 		BE2C0CD627DB6A0000591D3F /* DevtoolsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2C0CD427DB6A0000591D3F /* DevtoolsView.swift */; };
+		BE4C45D927E2BCB400201CAC /* FBLPromises in Frameworks */ = {isa = PBXBuildFile; productRef = BE4C45D827E2BCB400201CAC /* FBLPromises */; };
+		BE4C45DB27E2BCB400201CAC /* Promises in Frameworks */ = {isa = PBXBuildFile; productRef = BE4C45DA27E2BCB400201CAC /* Promises */; };
+		BE4C45DD27E2BCCE00201CAC /* GamePageByPromise.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4C45DC27E2BCCE00201CAC /* GamePageByPromise.swift */; };
+		BE4C45DE27E2BCCE00201CAC /* GamePageByPromise.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4C45DC27E2BCCE00201CAC /* GamePageByPromise.swift */; };
+		BE4C45E127E2BD0F00201CAC /* FBLPromises in Frameworks */ = {isa = PBXBuildFile; productRef = BE4C45E027E2BD0F00201CAC /* FBLPromises */; };
+		BE4C45E327E2BD0F00201CAC /* Promises in Frameworks */ = {isa = PBXBuildFile; productRef = BE4C45E227E2BD0F00201CAC /* Promises */; };
+		BE4C45E527E2BFB700201CAC /* GameEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4C45E427E2BFB700201CAC /* GameEnums.swift */; };
+		BE4C45E627E2BFB700201CAC /* GameEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4C45E427E2BFB700201CAC /* GameEnums.swift */; };
 		BE5D649027D8A8BF006B4222 /* AppMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5D648027D8A8BD006B4222 /* AppMain.swift */; };
 		BE5D649127D8A8BF006B4222 /* AppMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5D648027D8A8BD006B4222 /* AppMain.swift */; };
 		BE5D649227D8A8BF006B4222 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5D648127D8A8BD006B4222 /* ContentView.swift */; };
@@ -49,6 +57,8 @@
 		BE2C0CCE27DB5A3B00591D3F /* ActionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionListView.swift; sourceTree = "<group>"; };
 		BE2C0CD127DB64D200591D3F /* ActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
 		BE2C0CD427DB6A0000591D3F /* DevtoolsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevtoolsView.swift; sourceTree = "<group>"; };
+		BE4C45DC27E2BCCE00201CAC /* GamePageByPromise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePageByPromise.swift; sourceTree = "<group>"; };
+		BE4C45E427E2BFB700201CAC /* GameEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEnums.swift; sourceTree = "<group>"; };
 		BE5D648027D8A8BD006B4222 /* AppMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppMain.swift; sourceTree = "<group>"; };
 		BE5D648127D8A8BD006B4222 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		BE5D648227D8A8BF006B4222 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -74,6 +84,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE4C45DB27E2BCB400201CAC /* Promises in Frameworks */,
+				BE4C45D927E2BCB400201CAC /* FBLPromises in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,18 +93,38 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE4C45E327E2BD0F00201CAC /* Promises in Frameworks */,
+				BE4C45E127E2BD0F00201CAC /* FBLPromises in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BE4C45D627E2BB9500201CAC /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				BE4C45E427E2BFB700201CAC /* GameEnums.swift */,
+				BE6738EE27E03644006873D1 /* GamePage.swift */,
+				BE4C45DC27E2BCCE00201CAC /* GamePageByPromise.swift */,
+			);
+			path = Game;
+			sourceTree = "<group>";
+		};
+		BE4C45DF27E2BD0F00201CAC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		BE5D647A27D8A8BD006B4222 = {
 			isa = PBXGroup;
 			children = (
 				BE5D647F27D8A8BD006B4222 /* Shared */,
 				BE5D648E27D8A8BF006B4222 /* macOS */,
 				BE5D648827D8A8BF006B4222 /* Products */,
+				BE4C45DF27E2BD0F00201CAC /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -132,7 +164,7 @@
 				BEE7C3B827D9F17800DF50E3 /* DeviceView.swift */,
 				BEE7C3A127D9117D00DF50E3 /* MainPage.swift */,
 				BEE7C3A527D9119600DF50E3 /* SettingPage.swift */,
-				BE6738EE27E03644006873D1 /* GamePage.swift */,
+				BE4C45D627E2BB9500201CAC /* Game */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -178,6 +210,10 @@
 			dependencies = (
 			);
 			name = "ToySR (iOS)";
+			packageProductDependencies = (
+				BE4C45D827E2BCB400201CAC /* FBLPromises */,
+				BE4C45DA27E2BCB400201CAC /* Promises */,
+			);
 			productName = "ToySR (iOS)";
 			productReference = BE5D648727D8A8BF006B4222 /* ToySR.app */;
 			productType = "com.apple.product-type.application";
@@ -195,6 +231,10 @@
 			dependencies = (
 			);
 			name = "ToySR (macOS)";
+			packageProductDependencies = (
+				BE4C45E027E2BD0F00201CAC /* FBLPromises */,
+				BE4C45E227E2BD0F00201CAC /* Promises */,
+			);
 			productName = "ToySR (macOS)";
 			productReference = BE5D648D27D8A8BF006B4222 /* ToySR.app */;
 			productType = "com.apple.product-type.application";
@@ -226,6 +266,9 @@
 				Base,
 			);
 			mainGroup = BE5D647A27D8A8BD006B4222;
+			packageReferences = (
+				BE4C45D727E2BCB400201CAC /* XCRemoteSwiftPackageReference "promises" */,
+			);
 			productRefGroup = BE5D648827D8A8BF006B4222 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -266,9 +309,11 @@
 				BE5D649227D8A8BF006B4222 /* ContentView.swift in Sources */,
 				BE6738EF27E03644006873D1 /* GamePage.swift in Sources */,
 				BEE7C3A227D9117D00DF50E3 /* MainPage.swift in Sources */,
+				BE4C45E527E2BFB700201CAC /* GameEnums.swift in Sources */,
 				BE5D649027D8A8BF006B4222 /* AppMain.swift in Sources */,
 				BEE7C39727D8A96F00DF50E3 /* Middleware.swift in Sources */,
 				BEE7C39927D8A96F00DF50E3 /* Reducer.swift in Sources */,
+				BE4C45DD27E2BCCE00201CAC /* GamePageByPromise.swift in Sources */,
 				BE2C0CD527DB6A0000591D3F /* DevtoolsView.swift in Sources */,
 				BEE7C3AF27D955F300DF50E3 /* HistoryView.swift in Sources */,
 				BEE7C3B227D9EBD600DF50E3 /* ConsoleView.swift in Sources */,
@@ -290,9 +335,11 @@
 				BE5D649327D8A8BF006B4222 /* ContentView.swift in Sources */,
 				BE6738F027E03644006873D1 /* GamePage.swift in Sources */,
 				BEE7C3A327D9117D00DF50E3 /* MainPage.swift in Sources */,
+				BE4C45E627E2BFB700201CAC /* GameEnums.swift in Sources */,
 				BE5D649127D8A8BF006B4222 /* AppMain.swift in Sources */,
 				BEE7C39827D8A96F00DF50E3 /* Middleware.swift in Sources */,
 				BEE7C39A27D8A96F00DF50E3 /* Reducer.swift in Sources */,
+				BE4C45DE27E2BCCE00201CAC /* GamePageByPromise.swift in Sources */,
 				BE2C0CD627DB6A0000591D3F /* DevtoolsView.swift in Sources */,
 				BEE7C3B027D955F300DF50E3 /* HistoryView.swift in Sources */,
 				BEE7C3B327D9EBD600DF50E3 /* ConsoleView.swift in Sources */,
@@ -566,6 +613,40 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		BE4C45D727E2BCB400201CAC /* XCRemoteSwiftPackageReference "promises" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:google/promises.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		BE4C45D827E2BCB400201CAC /* FBLPromises */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BE4C45D727E2BCB400201CAC /* XCRemoteSwiftPackageReference "promises" */;
+			productName = FBLPromises;
+		};
+		BE4C45DA27E2BCB400201CAC /* Promises */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BE4C45D727E2BCB400201CAC /* XCRemoteSwiftPackageReference "promises" */;
+			productName = Promises;
+		};
+		BE4C45E027E2BD0F00201CAC /* FBLPromises */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BE4C45D727E2BCB400201CAC /* XCRemoteSwiftPackageReference "promises" */;
+			productName = FBLPromises;
+		};
+		BE4C45E227E2BD0F00201CAC /* Promises */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BE4C45D727E2BCB400201CAC /* XCRemoteSwiftPackageReference "promises" */;
+			productName = Promises;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = BE5D647B27D8A8BD006B4222 /* Project object */;
 }
