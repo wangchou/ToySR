@@ -19,6 +19,7 @@ struct GamePage: View {
       Text("\(questionIndex)/4")
         .padding()
         .task(priority: .userInitiated) {
+          store.log("swift 5.5 async/await")
           await nextQuestion()
         }
         .onReceive(store.$state) {
@@ -28,23 +29,24 @@ struct GamePage: View {
   }
 
   func nextQuestion() async {
-    if questionIndex < 4 {
-      ~.nextQuestion
-
-      gameStep = .questioning
-      await speak("Question: hello")
-      await speak("Candidates: left:aaa, right:bbb")
-
-      gameStep = .answering
-      await userAction()
-
-      gameStep = .responding
-      await showResponse()
-
-      await nextQuestion()
-    } else {
+    guard questionIndex < 4 else {
       ~.finishGame
+      return
     }
+
+    ~.nextQuestion
+
+    gameStep = .questioning
+    await speak("Question: hello")
+    await speak("Candidates: left:aaa, right:bbb")
+
+    gameStep = .answering
+    await userAction()
+
+    gameStep = .responding
+    await showResponse()
+
+    await nextQuestion()
   }
 
   func selectAnswer(_ selection: UserSelection) {
