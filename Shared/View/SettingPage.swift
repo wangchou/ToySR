@@ -37,7 +37,7 @@ struct SettingPage: View {
   }
   
   func gotoMain() {
-    store.dispatch(.gotoPage(.main))
+    ~.gotoPage(.main)
   }
 }
 

@@ -12,6 +12,8 @@ enum Page: Codable {
 
 struct CurrentGame: Codable {
   var index = 0
+  var selection: GameSelection = .timeout
+  var step: GameStep = .questioning
   var score = 0
 }
 

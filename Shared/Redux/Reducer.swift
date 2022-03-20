@@ -32,18 +32,23 @@ let settingReducer: Reducer = { state, action in
 
 let gameReducer: Reducer = { state, action in
   var newState = state
+  var game = state.currentGame
   switch action {
   case .startGame:
-    newState.page = .game
-    newState.currentGame = CurrentGame()
+    game = CurrentGame()
   case .nextQuestion:
-    newState.currentGame.index += 1
+    game.index += 1
+  case .setGameStep(let step):
+    game.step = step
+  case .setGameSelection(let selection):
+    game.selection = selection
   case .finishGame:
     newState.page = .main
     newState.gameScores.append(newState.currentGame.score)
   default:
     return nil
   }
+  newState.currentGame = game
   return newState
 }
 

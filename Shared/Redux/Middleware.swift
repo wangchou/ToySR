@@ -13,17 +13,14 @@ let logger: Middleware = { next in { actionMeta in
 // handle complex action
 // could be further divided into domains
 // ex: ServiceApiHandler, SpeechRecognitionHandler...
-let complexActionHandler: Middleware = { next in { actionMeta in
+let complexActionMiddleware: Middleware = { next in { actionMeta in
   switch actionMeta.action {
   case .loadImage:
+    actionMeta.async(.setImageName("Loading"))
     Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { _ in
-      store.dispatch(.setImageName("pencil.circle"), actionMeta)
+      actionMeta.then(.setImageName("pencil.circle"))
     }
-    
-    next(.init(id: -1,
-               parents: actionMeta.allIds,
-               action: .setImageName("Loading")))
-    
+
   default:
     next(actionMeta)
   }

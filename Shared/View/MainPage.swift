@@ -73,7 +73,7 @@ struct MainPage: View {
   }
 
   func startGame() {
-    ~.startGame
+    ~.gotoPage(.game)
   }
 }
 

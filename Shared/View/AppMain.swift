@@ -14,7 +14,8 @@ let store = Store(
   ],
   middlewares: [
     logger,
-    complexActionHandler
+    complexActionMiddleware,
+    gameMiddleware
   ]
 )
 

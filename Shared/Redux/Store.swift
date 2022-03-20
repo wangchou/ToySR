@@ -27,12 +27,14 @@ class Store {
   func dispatch(_ action: Action, _ parent: ActionMeta? = nil) {
     // avoid "Publishing changes from background threads is not allowed" issue
     // from Task { await xxxAction }
-    DispatchQueue.main.async {
+    if Thread.isMainThread {
       let actionMeta = ActionMeta(id: self.nextId,
                                   parents: parent?.allIds ?? [],
                                   action: action)
-      self._dispatch(actionMeta)
-      self.history.append((actionMeta, self.state))
+      _dispatch(actionMeta)
+      history.append((actionMeta, self.state))
+    } else {
+      print("warning: \(action) is discarded.")
     }
   }
   
@@ -52,9 +54,12 @@ class Store {
   @Published private(set) var log = "console view\n"
   
   private var actionCount = 0
+
   func log(_ str: String) {
-    DispatchQueue.main.async {
-      self.log += str + "\n"
+    if Thread.isMainThread {
+      log += str + "\n"
+    } else {
+      print("warning: store.log should be on main thread")
     }
   }
   

@@ -14,7 +14,7 @@ struct ActionListView: View {
     .setFontSize(20),
     .setFontSize(12),
     .loadImage,
-    .startGame
+    .gotoPage(.game)
   ]
   
   var body: some View {

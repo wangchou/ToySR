@@ -16,6 +16,9 @@ enum Action: Hashable {
   // card game
   case startGame
   case nextQuestion
+  case setGameStep(GameStep)
+  case setGameSelection(GameSelection)
+  case userSelect(GameSelection)
   case finishGame
 }
 
@@ -45,5 +48,19 @@ struct ActionMeta {
       return $0 + " -> \($1)"
     }
     return "\(parentChainStr)\n\(action)"
+  }
+
+  static func +(lhs: ActionMeta, rhs: Action) {
+    store.dispatch(rhs, lhs)
+  }
+
+  func then(_ action: Action) {
+    store.dispatch(action, self)
+  }
+  
+  func async(_ action: Action) {
+    DispatchQueue.main.async {
+      store.dispatch(action, self)
+    }
   }
 }
