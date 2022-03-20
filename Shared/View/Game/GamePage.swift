@@ -1,6 +1,7 @@
 import SwiftUI
+import Promises
 
-private var userActionContinuation: CheckedContinuation<Void, Never>?
+var userActionPromise: Promise<UserSelection>?
 
 struct GamePage: View {
   @State var questionIndex = 0
@@ -18,9 +19,9 @@ struct GamePage: View {
 
       Text("\(questionIndex)/4")
         .padding()
-        .task(priority: .userInitiated) {
-          store.log("swift 5.5 async/await")
-          await nextQuestion()
+        .task {
+          store.log("google/promises")
+          nextQuestion()
         }
         .onReceive(store.$state) {
           questionIndex = $0.currentGame.index
@@ -28,7 +29,7 @@ struct GamePage: View {
     }
   }
 
-  func nextQuestion() async {
+  func nextQuestion() {
     guard questionIndex < 4 else {
       ~.finishGame
       return
@@ -37,50 +38,45 @@ struct GamePage: View {
     ~.nextQuestion
 
     gameStep = .questioning
-    await speak("Question: hello")
-    await speak("Candidates: left:aaa, right:bbb")
-
-    gameStep = .answering
-    await userAction()
-
-    gameStep = .responding
-    await showResponse()
-
-    await nextQuestion()
+    speak("Question: hello")
+      .then {
+        speak("Candidates: left:aaa, right:bbb")
+      }
+      .then { () -> Promise<UserSelection> in
+        gameStep = .answering
+        userActionPromise = userAction()
+        return userActionPromise!
+      }
+      .then { selection -> Void in
+        self.selection = selection
+        gameStep = .responding
+        showResponse()
+        nextQuestion()
+      }
   }
 
   func selectAnswer(_ selection: UserSelection) {
-    guard self.selection == .timeout else { return }
-    self.selection = selection
-    userActionContinuation?.resume()
-    store.log("userAction resume called")
-    userActionContinuation = nil
+    userActionPromise?.fulfill(selection)
   }
 
-  func speak(_ str: String) async {
-    return await withCheckedContinuation { cont in
-      DispatchQueue.global().asyncAfter(deadline: .now() + .seconds(1)) {
+  func speak(_ str: String) -> Promise<Void> {
+    Promise<Void> { fulfill, reject in
+      Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { _ in
         store.log("\"\(str)\" is said")
-        cont.resume()
+        fulfill(())
       }
     }
   }
 
-  func userAction() async {
-    self.selection = .timeout
-    userActionContinuation = nil
-    let index = questionIndex
-    return await withCheckedContinuation { cont in
-      userActionContinuation = cont
-      DispatchQueue.global().asyncAfter(deadline: .now() + .seconds(5)) {
-        // continuation can only be called exactly once
-        guard self.questionIndex == index else { return }
-        selectAnswer(.timeout)
+  func userAction() -> Promise<UserSelection> {
+    Promise<UserSelection> { fulfill, reject in
+      Timer.scheduledTimer(withTimeInterval: 5, repeats: false) { _ in
+        fulfill(.timeout)
       }
     }
   }
 
-  func showResponse() async -> Void {
+  func showResponse() -> Void {
     store.log("selection: \(self.selection)")
   }
 }

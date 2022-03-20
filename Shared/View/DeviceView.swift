@@ -37,7 +37,7 @@ struct DeviceView: View {
         case .setting:
           SettingPage()
         case .game:
-          GamePageByPromise()
+          GamePage()
         }
       }
       .frame(width: device.size.width,
