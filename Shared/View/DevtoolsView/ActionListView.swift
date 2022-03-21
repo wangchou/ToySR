@@ -8,12 +8,9 @@ extension Action {
 
 struct ActionListView: View {
   var demoCases: [Action] = [
-    .increaseCounter,
-    .setImageName("pencil.circle"),
     .gotoPage(.setting),
     .setFontSize(20),
     .setFontSize(12),
-    .loadImage,
     .gotoPage(.game)
   ]
   

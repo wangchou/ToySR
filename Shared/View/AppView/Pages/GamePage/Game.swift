@@ -1,3 +1,11 @@
+struct Game: Codable {
+  var index = 0
+  var step: GameStep = .questioning
+  var candidates: [String] = []
+  var isCorrect: Bool = false
+  var score = 0
+}
+
 enum GameSelection: Int, Codable {
   case left
   case right

@@ -2,23 +2,19 @@ import Foundation
 import SwiftUI
 
 enum Action: Hashable {
-  // mainReducer
-  case increaseCounter
-  case setImageName(String)
+  // routeReducer
   case gotoPage(Page)
 
   // settingReducer
   case setFontSize(CGFloat)
 
-  // complexActionMiddleware
-  case loadImage
-
   // card game
   case startGame
   case nextQuestion
+  case setCandidates([String])
   case setGameStep(GameStep)
-  case setGameSelection(GameSelection)
   case userSelect(GameSelection)
+  case setIsCorect(Bool)
   case finishGame
 }
 

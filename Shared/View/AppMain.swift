@@ -7,14 +7,13 @@ import SwiftUI
 let store = Store(
   state: AppState(),
   reducers: [
-    mainReducer,
+    routeReducer,
     settingReducer,
     gameReducer,
     unhandledReducer
   ],
   middlewares: [
     logger,
-    complexActionMiddleware,
     gameMiddleware
   ]
 )

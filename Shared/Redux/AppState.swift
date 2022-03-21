@@ -1,33 +1,23 @@
 import SwiftUI
 
-struct Settings: Codable {
-  var fontSize: CGFloat = 12
-}
-
 enum Page: Codable {
   case main
   case setting
   case game
 }
 
-struct CurrentGame: Codable {
-  var index = 0
-  var selection: GameSelection = .timeout
-  var step: GameStep = .questioning
-  var score = 0
-}
-
 struct AppState: Codable {
+  // Route
   var page: Page = .main
-  
-  var counter: Int = 0
-  var imageName: String? = nil
-  
+
+  // MainPage
+  var gameScores: [Int] = []
+
+  // SettingPage
   var settings = Settings()
 
-  // Game
-  var currentGame = CurrentGame()
-  var gameScores: [Int] = []
+  // GamePage
+  var game = Game()
 }
 
 

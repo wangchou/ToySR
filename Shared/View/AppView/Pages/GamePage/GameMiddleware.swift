@@ -17,43 +17,49 @@ let gameMiddleware: Middleware = { next in { actionMeta in
   }
 }}
 
-var userActionPromise: Promise<GameSelection>?
+private let tts = TTS()
+private let questions = [
+  ("cat", ["犬", "ねこ"], GameSelection.right),
+  ("Good Morning?", ["おはよう。", "お元気ですか。"], GameSelection.left),
+  ("purple", ["むらさき", "あかい"], GameSelection.left)
+]
+
+private var userActionPromise: Promise<GameSelection>?
 
 private func nextQuestion(actionMeta: ActionMeta) {
-  guard store.state.currentGame.index < 3 else {
+  actionMeta.then(.nextQuestion)
+  guard store.state.game.index < questions.count+1 else {
     actionMeta.then(.finishGame)
     return
   }
 
-  actionMeta.then(.nextQuestion)
   actionMeta.then(.setGameStep(.questioning))
 
-  speak("Question: hello")
-    .then {
-      speak("Candidates: left:aaa, right:bbb")
-    }
+  let question = questions[store.state.game.index-1]
+  actionMeta.then(.setCandidates(question.1))
+
+  tts.say(question.0)
     .then { () -> Promise<GameSelection> in
       actionMeta.then(.setGameStep(.answering))
       userActionPromise = userAction()
       return userActionPromise!
     }
-    .then { selection -> Void in
-      actionMeta.then(.setGameSelection(selection))
+    .then { selection -> Promise<Void> in
       actionMeta.then(.setGameStep(.responding))
+      let isCorrect = question.2 == selection
+      actionMeta.then(.setIsCorect(isCorrect))
+      return tts.say(isCorrect ? "Correct" : "Wrong")
+    }
+    .then {
       nextQuestion(actionMeta: actionMeta)
     }
 }
 
 private func speak(_ str: String) -> Promise<Void> {
-  Promise<Void> { fulfill, reject in
-    Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { _ in
-      store.log("\"\(str)\" is said")
-      fulfill(())
-    }
-  }
+  tts.say(str)
 }
 
-func userAction() -> Promise<GameSelection> {
+private func userAction() -> Promise<GameSelection> {
   Promise<GameSelection> { fulfill, reject in
     Timer.scheduledTimer(withTimeInterval: 5, repeats: false) { _ in
       fulfill(.timeout)
