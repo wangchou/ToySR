@@ -33,6 +33,6 @@ struct GamePage: View {
   }
 
   func selectAnswer(_ selection: GameSelection) {
-    ~.userSelect(selection)
+    store.game.userSelect(selection: selection)
   }
 }

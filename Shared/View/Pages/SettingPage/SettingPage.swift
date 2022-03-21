@@ -29,15 +29,15 @@ struct SettingPage: View {
   
   // actions
   func increaseFontSize() {
-    ~.setFontSize(fontSize + 2.0)
+    store.settings.setFontSize(fontSize + 2.0)
   }
   
   func decreaseFontSize() {
-    ~.setFontSize(fontSize - 2.0)
+    store.settings.setFontSize(fontSize - 2.0)
   }
   
   func gotoMain() {
-    ~.gotoPage(.main)
+    store.gotoPage(.main)
   }
 }
 

@@ -36,11 +36,11 @@ struct MainPage: View {
   }
 
   func gotoSetting() {
-    ~.gotoPage(.setting)
+    store.gotoPage(.setting)
   }
 
   func startGame() {
-    ~.gotoPage(.game)
+    store.gotoPage(.game)
   }
 }
 

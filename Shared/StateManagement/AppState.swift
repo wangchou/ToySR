@@ -13,11 +13,19 @@ struct AppState: Codable, Hashable {
   // MainPage
   var gameScores: [Int] = []
 
-  // SettingPage
-  var settings = Settings()
+  // from SettingStore
+  private(set) var settings = Settings()
 
-  // GamePage
-  var game = Game()
+  // from GameStore
+  private(set) var game = Game()
+
+  mutating func updateGame(_ game: Game) {
+    self.game = game
+  }
+
+  mutating func updateSettings(_ settings: Settings) {
+    self.settings = settings
+  }
 }
 
 

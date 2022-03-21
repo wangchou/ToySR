@@ -1,22 +1,6 @@
 import SwiftUI
 
-// global store variable
-//  - [read]  by store.state
-//  - [write] by store.dispatch(Action)
-//  - [sync state with view] by onReceive(store.$state) in Views
-let store = Store(
-  state: AppState(),
-  reducers: [
-    mainReducer,
-    settingReducer,
-    gameReducer,
-    unhandledReducer
-  ],
-  middlewares: [
-    logger,
-    gameMiddleware
-  ]
-)
+let store = Store()
 
 @main
 struct MyApp: App {

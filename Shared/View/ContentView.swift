@@ -9,7 +9,6 @@ struct ContentView: View {
     HStack(alignment: .top, spacing: 0) {
       DeviceView(device: $device1)
       //DeviceView(device: $device2)
-      DevtoolsView()
     }
   }
 }
