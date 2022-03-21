@@ -6,7 +6,7 @@ enum Page: Codable {
   case game
 }
 
-struct AppState: Codable {
+struct AppState: Codable, Hashable {
   // Route
   var page: Page = .main
 

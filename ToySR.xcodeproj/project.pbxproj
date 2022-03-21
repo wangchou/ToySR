@@ -169,16 +169,7 @@
 			path = macOS;
 			sourceTree = "<group>";
 		};
-		BEB14CB127E800AB0015E0C4 /* AppView */ = {
-			isa = PBXGroup;
-			children = (
-				BEE7C3B827D9F17800DF50E3 /* DeviceView.swift */,
-				BEB14CB227E800F30015E0C4 /* Pages */,
-			);
-			path = AppView;
-			sourceTree = "<group>";
-		};
-		BEB14CB227E800F30015E0C4 /* Pages */ = {
+		BEB14CB127E800AB0015E0C4 /* Pages */ = {
 			isa = PBXGroup;
 			children = (
 				BEE7C3A127D9117D00DF50E3 /* MainPage.swift */,
@@ -203,7 +194,8 @@
 			children = (
 				BE5D648027D8A8BD006B4222 /* AppMain.swift */,
 				BE5D648127D8A8BD006B4222 /* ContentView.swift */,
-				BEB14CB127E800AB0015E0C4 /* AppView */,
+				BEE7C3B827D9F17800DF50E3 /* DeviceView.swift */,
+				BEB14CB127E800AB0015E0C4 /* Pages */,
 				BEE7C3B427D9EBE400DF50E3 /* DevtoolsView */,
 			);
 			path = View;

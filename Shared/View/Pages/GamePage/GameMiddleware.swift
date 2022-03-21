@@ -3,10 +3,15 @@ import Promises
 
 let gameMiddleware: Middleware = { next in { actionMeta in
   switch actionMeta.action {
+  case .gotoPage(let page):
+    next(actionMeta)
+    if page == .game {
+      actionMeta.async(.startGame)
+    }
   case .startGame:
     next(actionMeta)
     DispatchQueue.main.async {
-      nextQuestion(actionMeta: actionMeta)
+      nextQuestion(from: actionMeta)
     }
 
   case .userSelect(let selection):
@@ -26,37 +31,35 @@ private let questions = [
 
 private var userActionPromise: Promise<GameSelection>?
 
-private func nextQuestion(actionMeta: ActionMeta) {
-  actionMeta.then(.nextQuestion)
+private func nextQuestion(from actionMeta: ActionMeta) {
+  let dispatch = { (action: Action) in actionMeta.then(action) }
+
+  dispatch(.nextQuestion)
   guard store.state.game.index < questions.count+1 else {
-    actionMeta.then(.finishGame)
+    dispatch(.finishGame)
     return
   }
 
-  actionMeta.then(.setGameStep(.questioning))
+  dispatch(.setGameStep(.questioning))
 
   let question = questions[store.state.game.index-1]
-  actionMeta.then(.setCandidates(question.1))
+  dispatch(.setCandidates(question.1))
 
   tts.say(question.0)
     .then { () -> Promise<GameSelection> in
-      actionMeta.then(.setGameStep(.answering))
+      dispatch(.setGameStep(.answering))
       userActionPromise = userAction()
       return userActionPromise!
     }
     .then { selection -> Promise<Void> in
-      actionMeta.then(.setGameStep(.responding))
+      dispatch(.setGameStep(.responding))
       let isCorrect = question.2 == selection
-      actionMeta.then(.setIsCorect(isCorrect))
+      dispatch(.setIsCorect(isCorrect))
       return tts.say(isCorrect ? "Correct" : "Wrong")
     }
     .then {
-      nextQuestion(actionMeta: actionMeta)
+      nextQuestion(from: actionMeta)
     }
-}
-
-private func speak(_ str: String) -> Promise<Void> {
-  tts.say(str)
 }
 
 private func userAction() -> Promise<GameSelection> {

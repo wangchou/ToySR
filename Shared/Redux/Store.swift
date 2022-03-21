@@ -32,6 +32,8 @@ class Store {
                                   parents: parent?.allIds ?? [],
                                   action: action)
       _dispatch(actionMeta)
+      
+      if case .setAppStateFromHistory = action { return }
       history.append((actionMeta, self.state))
     } else {
       print("warning: \(action) is discarded.")

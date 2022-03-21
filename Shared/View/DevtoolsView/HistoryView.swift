@@ -3,23 +3,36 @@ import Foundation
 
 
 struct HistoryView: View {
-  @State var actionIndex: Int = -1
+  @State var entry: (ActionMeta, AppState)?
   @State var history: [(ActionMeta, AppState)] = []
-  
+
   var body: some View {
     HStack(alignment: .top, spacing: 5) {
       // action lists
       ScrollView {
-        VStack(spacing: 2) {
-          ForEach(history.indices, id: \.self) { i in
-            ActionButton(title: history[i].0.prettyString,
-                         isSelected: actionIndex == i ||
-                         (actionIndex == -1 && i == history.count - 1),
-                         onTap: {
-              actionIndex = actionIndex != i ? i : -1
-            })
+        ScrollViewReader { value in
+          VStack(spacing: 0) {
+            ForEach(history, id: \.0.id) { entry in
+              ActionButton(
+                title: entry.0.prettyString,
+                isSelected: self.entry?.0.id == entry.0.id,
+                onTap: {},
+                onHover: {
+                  if $0 {
+                    self.entry = entry
+                    ~.setAppStateFromHistory(entry.1)
+                  } else {
+                    self.entry = history.last
+                    ~.setAppStateFromHistory(history.last!.1)
+                  }
+                }
+              )
+            }
+            .onChange(of: history.count) { _ in
+              value.scrollTo(history.last!.0.id)
+            }
+            Spacer()
           }
-          Spacer()
         }
       }
       .font(.system(size: 12))
@@ -30,11 +43,8 @@ struct HistoryView: View {
       // state
       ScrollView {
         HStack {
-          if actionIndex >= 0 {
-            Text("\(history[actionIndex].1.dumpString)")
-              .padding(3)
-          } else if let appState = history.last?.1 {
-            Text("\(appState.dumpString)")
+          if let entry = self.entry {
+            Text("\(entry.0.prettyString)\n---\n\(entry.1.dumpString)")
               .padding(3)
           } else {
             Text("")
@@ -49,6 +59,7 @@ struct HistoryView: View {
     .padding(5)
     .onReceive(store.$history) {
       history = $0
+      entry = $0.last
     }
   }
 }

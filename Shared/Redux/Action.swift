@@ -16,6 +16,9 @@ enum Action: Hashable {
   case userSelect(GameSelection)
   case setIsCorect(Bool)
   case finishGame
+
+  // devtools
+  case setAppStateFromHistory(AppState)
 }
 
 extension Action {

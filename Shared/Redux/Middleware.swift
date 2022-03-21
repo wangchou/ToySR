@@ -5,7 +5,7 @@ typealias Middleware = (@escaping ActionMetaHandler) -> ActionMetaHandler
 
 let logger: Middleware = { next in { actionMeta in
   print("------")
-  print("Action: \(actionMeta.action)")
+  print(actionMeta.prettyString)
   next(actionMeta)
-  store.state.prettyPrint()
+  //store.state.prettyPrint()
 }}

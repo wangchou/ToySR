@@ -22,7 +22,7 @@ struct ActionListView: View {
                        isSelected: false,
                        onTap: {
             store.dispatch(action)
-          })
+          }, onHover: { _ in })
         }
       }
     }

@@ -7,7 +7,7 @@ import SwiftUI
 let store = Store(
   state: AppState(),
   reducers: [
-    routeReducer,
+    mainReducer,
     settingReducer,
     gameReducer,
     unhandledReducer

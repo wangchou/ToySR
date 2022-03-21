@@ -27,9 +27,6 @@ struct GamePage: View {
       Text("Question No: \(game.index)")
       Text("Score: \(game.score)")
     }
-    .task {
-      ~.startGame
-    }
     .onReceive(store.$state) {
       game = $0.game
     }

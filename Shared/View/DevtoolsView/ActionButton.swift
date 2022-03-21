@@ -4,6 +4,7 @@ struct ActionButton: View {
   var title: String
   var isSelected: Bool
   var onTap: () -> Void
+  var onHover: (Bool) -> Void
 
   @State var isHovering: Bool = false
 
@@ -21,10 +22,11 @@ struct ActionButton: View {
       .overlay(alignment: .leading) {
         Text(title)
           .padding(.leading, 5)
-          .font(.system(size: 12))
+          .font(.system(size: 10))
       }
       .onHover {
         isHovering = $0
+        self.onHover($0)
       }
       .onTapGesture { onTap() }
   }
@@ -32,6 +34,6 @@ struct ActionButton: View {
 
 struct ActionButton_Previews: PreviewProvider {
   static var previews: some View {
-    ActionButton(title: "title", isSelected: false, onTap: {}, isHovering: false)
+    ActionButton(title: "title", isSelected: false, onTap: {}, onHover: {_ in }, isHovering: false)
   }
 }
