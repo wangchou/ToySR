@@ -29,6 +29,7 @@ class GameStore {
 
   private func nextQuestion() {
     game.index += 1
+    game.changed()
     guard game.index < questions.count+1 else {
       finishGame()
       return
@@ -38,10 +39,12 @@ class GameStore {
 
     let question = questions[store.state.game.index-1]
     game.candidates = question.1
+    game.changed()
 
     tts.say(question.0)
       .then { () -> Promise<GameSelection> in
         self.game.step = .answering
+        self.game.changed()
         userActionPromise = self.userAction()
         return userActionPromise!
       }
@@ -50,6 +53,7 @@ class GameStore {
         let isCorrect = question.2 == selection
         self.game.isCorrect = isCorrect
         self.game.score += isCorrect ? 10 : 0
+        self.game.changed()
         return self.tts.say(isCorrect ? "Correct" : "Wrong")
       }
       .then {

@@ -1,4 +1,4 @@
-struct Game: Codable, Hashable {
+class Game: VersionObject, Codable {
   var index = 0
   var step: GameStep = .questioning
   var candidates: [String] = []

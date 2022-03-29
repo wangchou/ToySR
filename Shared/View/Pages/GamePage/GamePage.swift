@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct GamePage: View {
-  @State var game = Game()
+  @CompareVersion var game = Game()
 
   var body: some View {
     VStack {

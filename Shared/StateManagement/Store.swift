@@ -30,6 +30,16 @@ class Store {
       self.state.updateSettings($0)
     }
     cancellables.append(cancellable)
+
+    NotificationCenter.default.addObserver(self,
+                                           selector: #selector(onVersionObjectChanged),
+                                           name: versionChangedNotificationName,
+                                           object: nil)
+  }
+
+  @objc
+  func onVersionObjectChanged() {
+    state.changed()
   }
 
   func addGameScores(score: Int) {

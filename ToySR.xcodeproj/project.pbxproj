@@ -23,6 +23,8 @@
 		BE5F097E27E8488C00B2FAA0 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5F097C27E8488C00B2FAA0 /* Device.swift */; };
 		BE5F098027E84EF700B2FAA0 /* SettingsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5F097F27E84EF700B2FAA0 /* SettingsStore.swift */; };
 		BE5F098127E84EF700B2FAA0 /* SettingsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5F097F27E84EF700B2FAA0 /* SettingsStore.swift */; };
+		BE8DB2F327F2C14E000ADF2B /* VersionObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8DB2F227F2C14E000ADF2B /* VersionObject.swift */; };
+		BE8DB2F427F2C14E000ADF2B /* VersionObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8DB2F227F2C14E000ADF2B /* VersionObject.swift */; };
 		BEB14CA927E7F2F00015E0C4 /* TTS.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB14CA827E7F2F00015E0C4 /* TTS.swift */; };
 		BEB14CAA27E7F2F00015E0C4 /* TTS.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB14CA827E7F2F00015E0C4 /* TTS.swift */; };
 		BEB14CAF27E7FECC0015E0C4 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB14CAE27E7FECC0015E0C4 /* Game.swift */; };
@@ -53,6 +55,7 @@
 		BE5D648F27D8A8BF006B4222 /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
 		BE5F097C27E8488C00B2FAA0 /* Device.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Device.swift; path = DevtoolsView/Device.swift; sourceTree = "<group>"; };
 		BE5F097F27E84EF700B2FAA0 /* SettingsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsStore.swift; sourceTree = "<group>"; };
+		BE8DB2F227F2C14E000ADF2B /* VersionObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionObject.swift; sourceTree = "<group>"; };
 		BEB14CA827E7F2F00015E0C4 /* TTS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TTS.swift; sourceTree = "<group>"; };
 		BEB14CAE27E7FECC0015E0C4 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		BEB14CB427E802AE0015E0C4 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
@@ -178,6 +181,7 @@
 			children = (
 				BEE7C38D27D8A96F00DF50E3 /* AppState.swift */,
 				BEE7C38C27D8A96F00DF50E3 /* Store.swift */,
+				BE8DB2F227F2C14E000ADF2B /* VersionObject.swift */,
 			);
 			path = StateManagement;
 			sourceTree = "<group>";
@@ -298,6 +302,7 @@
 				BEB14CA927E7F2F00015E0C4 /* TTS.swift in Sources */,
 				BEE7C3A627D9119600DF50E3 /* SettingPage.swift in Sources */,
 				BE5D649227D8A8BF006B4222 /* ContentView.swift in Sources */,
+				BE8DB2F327F2C14E000ADF2B /* VersionObject.swift in Sources */,
 				BEE7C3A227D9117D00DF50E3 /* MainPage.swift in Sources */,
 				BE5D649027D8A8BF006B4222 /* AppMain.swift in Sources */,
 				BE4C45DD27E2BCCE00201CAC /* GamePage.swift in Sources */,
@@ -319,6 +324,7 @@
 				BEB14CAA27E7F2F00015E0C4 /* TTS.swift in Sources */,
 				BEE7C3A727D9119600DF50E3 /* SettingPage.swift in Sources */,
 				BE5D649327D8A8BF006B4222 /* ContentView.swift in Sources */,
+				BE8DB2F427F2C14E000ADF2B /* VersionObject.swift in Sources */,
 				BEE7C3A327D9117D00DF50E3 /* MainPage.swift in Sources */,
 				BE5D649127D8A8BF006B4222 /* AppMain.swift in Sources */,
 				BE4C45DE27E2BCCE00201CAC /* GamePage.swift in Sources */,
