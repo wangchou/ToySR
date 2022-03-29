@@ -27,7 +27,7 @@ struct AppState: Codable, Hashable {
     self.settings = settings
   }
 
-  private(set) var version: Int = 0
+  private var version: Int = 0
 
   mutating func changed() {
     version += 1
