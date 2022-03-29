@@ -4,10 +4,11 @@ import Combine
 
 let versionChangedNotificationName = Notification.Name("VersionObject changed")
 class VersionObject: NSObject {
-  var version: Int = 0
+  private(set) var version: Int = 0
   func changed() {
-    // watch this by global store
     version += 1
+
+    // watch this by global store
     NotificationCenter.default.post(name: versionChangedNotificationName,
                                     object: nil)
   }
