@@ -25,6 +25,8 @@
 		BE5F098127E84EF700B2FAA0 /* SettingsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5F097F27E84EF700B2FAA0 /* SettingsStore.swift */; };
 		BE8DB2F327F2C14E000ADF2B /* VersionObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8DB2F227F2C14E000ADF2B /* VersionObject.swift */; };
 		BE8DB2F427F2C14E000ADF2B /* VersionObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8DB2F227F2C14E000ADF2B /* VersionObject.swift */; };
+		BE8DB2F627F2ECAC000ADF2B /* ObjectDidChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8DB2F527F2ECAC000ADF2B /* ObjectDidChange.swift */; };
+		BE8DB2F727F2ECAC000ADF2B /* ObjectDidChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8DB2F527F2ECAC000ADF2B /* ObjectDidChange.swift */; };
 		BEB14CA927E7F2F00015E0C4 /* TTS.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB14CA827E7F2F00015E0C4 /* TTS.swift */; };
 		BEB14CAA27E7F2F00015E0C4 /* TTS.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB14CA827E7F2F00015E0C4 /* TTS.swift */; };
 		BEB14CAF27E7FECC0015E0C4 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB14CAE27E7FECC0015E0C4 /* Game.swift */; };
@@ -56,6 +58,7 @@
 		BE5F097C27E8488C00B2FAA0 /* Device.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Device.swift; path = DevtoolsView/Device.swift; sourceTree = "<group>"; };
 		BE5F097F27E84EF700B2FAA0 /* SettingsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsStore.swift; sourceTree = "<group>"; };
 		BE8DB2F227F2C14E000ADF2B /* VersionObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionObject.swift; sourceTree = "<group>"; };
+		BE8DB2F527F2ECAC000ADF2B /* ObjectDidChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectDidChange.swift; sourceTree = "<group>"; };
 		BEB14CA827E7F2F00015E0C4 /* TTS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TTS.swift; sourceTree = "<group>"; };
 		BEB14CAE27E7FECC0015E0C4 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		BEB14CB427E802AE0015E0C4 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
@@ -182,6 +185,7 @@
 				BEE7C38D27D8A96F00DF50E3 /* AppState.swift */,
 				BEE7C38C27D8A96F00DF50E3 /* Store.swift */,
 				BE8DB2F227F2C14E000ADF2B /* VersionObject.swift */,
+				BE8DB2F527F2ECAC000ADF2B /* ObjectDidChange.swift */,
 			);
 			path = StateManagement;
 			sourceTree = "<group>";
@@ -309,6 +313,7 @@
 				BEE7C39327D8A96F00DF50E3 /* AppState.swift in Sources */,
 				BEB14CAF27E7FECC0015E0C4 /* Game.swift in Sources */,
 				BEB14CB527E802AE0015E0C4 /* Settings.swift in Sources */,
+				BE8DB2F627F2ECAC000ADF2B /* ObjectDidChange.swift in Sources */,
 				BE5F098027E84EF700B2FAA0 /* SettingsStore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -331,6 +336,7 @@
 				BEE7C39427D8A96F00DF50E3 /* AppState.swift in Sources */,
 				BEB14CB027E7FECC0015E0C4 /* Game.swift in Sources */,
 				BEB14CB627E802AE0015E0C4 /* Settings.swift in Sources */,
+				BE8DB2F727F2ECAC000ADF2B /* ObjectDidChange.swift in Sources */,
 				BE5F098127E84EF700B2FAA0 /* SettingsStore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

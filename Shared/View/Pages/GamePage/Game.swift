@@ -1,9 +1,11 @@
-class Game: VersionObject, Codable {
-  var index = 0 { didSet { changed() } }
-  var step: GameStep = .questioning { didSet { changed() } }
-  var candidates: [String] = [] { didSet { changed() } }
-  var isCorrect: Bool = false { didSet { changed() } }
-  var score = 0 { didSet { changed() } }
+import Combine
+
+class Game: VersionObject {
+  @Published var index = 0
+  @Published var step: GameStep = .questioning
+  @Published var candidates: [String] = []
+  @Published var isCorrect: Bool = false
+  @Published var score = 0
 }
 
 enum GameSelection: Int, Codable {

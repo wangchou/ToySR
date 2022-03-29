@@ -6,7 +6,7 @@ enum Page: Codable {
   case game
 }
 
-struct AppState: Codable, Hashable {
+struct AppState: Hashable {
   // Route
   var page: Page = .main
 
@@ -45,17 +45,6 @@ extension AppState {
   
   func prettyPrint() {
     dump(self)
-  }
-  
-  var prettyJSONString: NSString? {
-    do {
-      let jsonData = try JSONEncoder().encode(self)
-      //let jsonString = String(data: jsonData, encoding: .utf8)!
-      return jsonData.prettyPrintedJSONString
-    } catch {
-      print(error)
-      return nil
-    }
   }
 }
 

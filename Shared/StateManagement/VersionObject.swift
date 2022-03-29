@@ -3,9 +3,19 @@ import SwiftUI
 import Combine
 
 let versionChangedNotificationName = Notification.Name("VersionObject changed")
-class VersionObject: NSObject {
+class VersionObject: NSObject, ObservableObject {
   var version: Int = 0
-  func changed() {
+
+  private var cancellable: AnyCancellable?
+
+  override init() {
+    super.init()
+    cancellable = objectDidChange.sink {
+      self.changed()
+    }
+  }
+
+  private func changed() {
     // watch this by global store
     version += 1
     NotificationCenter.default.post(name: versionChangedNotificationName,
